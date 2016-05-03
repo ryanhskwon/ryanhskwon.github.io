@@ -1,0 +1,18 @@
+source 'https://rubygems.org'
+
+gem 'jekyll' , '3.0.5'
+gem 'jekyll-coffeescript'
+gem 'jekyll-sass-converter'
+gem 'kramdown' , '1.10.0'
+gem 'pygments.rb'
+gem 'liquid'
+gem 'maruku'
+gem 'rdiscount'
+gem 'redcarpet'
+gem 'RedCloth'
+gem 'jemoji'
+gem 'jekyll-mentions'
+gem 'jekyll-redirect-from'
+gem 'jekyll-sitemap'
+
+gem 'github-pages', '77'
