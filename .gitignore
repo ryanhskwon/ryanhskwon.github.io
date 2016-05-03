@@ -1,3 +1,14 @@
 _site
 .sass-cache
 .jekyll-metadata
+.DS_Store
+.bundle
+
+.idea
+*.iml
+
+node_modules
+
+Gemfile
+Gemfile.lock
+
