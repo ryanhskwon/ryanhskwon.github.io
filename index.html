@@ -1,23 +1,44 @@
 ---
 layout: default
+title: Ryan's Blog
 ---
 
-<div class="home">
+{% assign loop_index = 0 %}
+{% for post in site.posts %}
+  {% if post.categories contains 'master spring mvc 4' %}{% else %}
 
-  <h1 class="page-heading">Posts</h1>
+  {% assign mod = loop_index | modulo: 2 %}
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+  {% if mod == 0 %}
+  <div class="article-row">
+  {% endif %}
+    <article class="article article-summary">
+      <div class="article-summary-inner">
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        <a href="{{ post.url }}" class="thumbnail">
+          <span style="background-image:url(/assets/images/thumbnails/thumbnail_{{ loop_index | modulo:10 | plus:1 }}.jpg)"
+          alt="{{ post.title }}" class="thumbnail-image"></span>
+        </a>
+
+        <div class="article-meta">
+          <p class="category"><a class="article-category-link" href="/categories/{{ post.categories | first | slugify }}">{{ post.categories | first }}</a></p>
+          <p class="date">
+            <time datetime="{{ post.date | date_to_long_string }}" itemprop="datePublished">{{ post.date | date_to_string }}</time>
+          </p>
+        </div>
+        <h2 class="article-title">
+          <a href="{{post.url}}" class="title">{{ post.title }}</a>
         </h2>
-      </li>
-    {% endfor %}
-  </ul>
+        <p class="article-excerpt">
+          {{ post.excerpt }}
+        </p>
+      </div>
+    </article>
+  {% if mod == 1 or forloop.last %}
+  </div>
+  {% endif %}
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  {% capture loop_index %}{{ loop_index | plus:1 }}{% endcapture %}
 
-</div>
+  {% endif %}
+ {% endfor %}

@@ -1,15 +1,54 @@
 ---
 layout: default
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-  </header>
+<article id="{{ page.id }}" class="article article-single article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    <header class="article-header">
+      <h1 class="article-title" itemprop="name">
+        {{ page.title }}
+      </h1>
+    </header>
+    <div class="article-date">
+      <i class="icon calendar"></i>
+      <time datetime="{{ page.date | date: "%Y-%m-%d" }}" itemprop="datePublished">{{ page.date | date_to_long_string }}</time>
+    </div>
 
-  <div class="post-content" itemprop="articleBody">
-    {{ content }}
+    <div class="article-share-links" data-url="{{site.url}}{{page.url}}" data-title="{{page.title}}">
+      <div>
+
+      <a data-provider="twitter" class="article-share twitter" target="_blank" title="Share on Twitter">
+        <span class="count">0</span>
+      </a>
+      <a data-provider="linkedIn" class="article-share linkedin" target="_blank" title="Share on LinkedIn">
+        <span class="count">0</span>
+      </a>
+      </a>
+      <a data-provider="facebook" class="article-share facebook" target="_blank" title="Share on Facebook">
+        <span class="count">0</span>
+      </a>
+      </a>
+      <a data-provider="google" class="article-share google" target="_blank" title="Share on Google+">
+        <span class="count">0</span>
+      </a>
+      <a href="#comments" class="article-share comments" title="Comments">
+        <span class="disqus-comment-count" data-disqus-url="{{site.url}}{{page.url}}">0</span>
+      </a>
+    </div>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      {{ content }}
+
+      <div class="follow">
+        For more articles on {{ page.categories | array_to_sentence_string }}, follow
+        <a href="">
+          <i class="icon twitter"></i>
+          ryan
+        </a>
+        on twitter
+      </div>
+    </div>
+
   </div>
-
 </article>

@@ -1,0 +1,41 @@
+---
+layout: default
+isCategory: true
+---
+
+<div class="article-row">
+
+  {% for post in site.categories[page.category] %}
+    {% assign loopindex = forloop.index0 | modulo: 2 %}
+
+    {% if loopindex == 0 %}
+    <div class="article-row">
+    {% endif %}
+      <article class="article article-summary">
+        <div class="article-summary-inner">
+
+          <a href="{{ post.url }}" class="thumbnail">
+            <span style="background-image:url(/assets/images/thumbnails/thumbnail_{{ forloop.index0 | modulo:10 | plus:1 }}.jpg)"
+            alt="{{ post.title }}" class="thumbnail-image"></span>
+          </a>
+
+          <div class="article-meta">
+            <p class="category"><a class="article-category-link" href="/categories/{{ post.categories | first | slugify }}">{{ post.categories | first }}</a></p>
+            <p class="date">
+              <time datetime="2016-05-01T10:00:00.000Z" itemprop="datePublished">{{ post.date | date_to_string }}</time>
+            </p>
+          </div>
+          <h2 class="article-title">
+            <a href="{{post.url}}" class="title">{{ post.title }}</a>
+          </h2>
+          <p class="article-excerpt">
+            {{ post.excerpt }}
+          </p>
+        </div>
+      </article>
+    {% if loopindex == 1 %}
+    </div>
+    {% endif %}
+
+  {% endfor %}
+</div>

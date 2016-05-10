@@ -1,0 +1,27 @@
+    <!-- Schema.org markup for Google+ -->
+	<meta itemprop="name" content="{{page.title}}">
+	<meta itemprop="description" content="{{page.excerpt | strip_html | truncate: 200}}">
+	<meta itemprop="image" content="{{site.author.gravatar}}">
+
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@dataspheres">
+	<meta name="twitter:title" content="{{page.title}}">
+	<meta name="twitter:description" content="{{page.excerpt | strip_html | truncate: 200}}">
+	<meta name="twitter:creator" content="@dataspheres">
+	<!-- Twitter summary card with large image must be at least 280x150px -->
+	<!-- <meta name="twitter:image:src" content="http://www.example.com/image.html"> -->
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="{{page.title}}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="{{site.url}}{{page.url}}" />
+	<meta property="og:image" content="{{site.author.gravatar}}" />
+	<meta property="og:description" content="{{page.excerpt | truncate: 200}}" />
+	<meta property="og:site_name" content="blog" />
+	<meta property="article:author" content="dataspheres" />
+	<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+	<meta property="article:modified_time" content="{{ page.date | date_to_xmlschema }}" />
+	<meta property="article:section" content="{{page.categories[0]}}" />
+	{% for tag in page.tags %}<meta property="article:tag" content="{{tag}}" /> 
+	{% endfor %}

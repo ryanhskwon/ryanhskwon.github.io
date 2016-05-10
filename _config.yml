@@ -1,16 +1,15 @@
-title: ryankwon.github.com
-email: dataspheres@gmail.com
 description: 
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: http://ryankwon.github.io # the base hostname & protocol for your site
-
-twitter_username: dataspheres
-github_username:  ryanhskwon
+disqus_shortname : dataspheres
 
 # Build settings
 markdown: redcarpet
 highlighter: pygments
+
+permalink: :title.html
+
 
 gems:
   - jekyll-redirect-from
@@ -22,3 +21,7 @@ exclude:
     - Gemfile.lock
     - LICENSE
     - README.md
+
+exclude: ['node_modules', 'package.json', 'gulpfile.js']
+
+

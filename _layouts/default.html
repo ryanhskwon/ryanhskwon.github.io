@@ -1,20 +1,296 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 
-  {% include head.html %}
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ryan" />
+  <meta name="owner" content="Ryan" /> {% if page.excerpt %}
+  <meta name="description" content="{{page.excerpt | strip_html | truncate: 180 }}" /> {% else %}
+  <meta name="description" content="{{site.description}}" /> {% endif %}
+  <meta name="keywords" content="Spring" />
+  <meta name="news_keywords" content="Spring" />
+  <meta name="content-language" content="en" />
+  <meta name="robots" content="follow,index,all" />
+  <meta name="google-site-verification" content="To-lHBJ-1nWMoTSlWKsL3keqsH2cKS2xYp8gJ3Omq9g" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{{ page.title }}</title>
 
-  <body>
+  <link rel="author" href="https://plus.google.com/u/0/{{site.author.googleId}}" />
+  <link rel="publisher" href="https://plus.google.com/u/0/b/{{site.author.googlePageId}}" /> {% if page.id %} {% include cards/article.html %} {% else %} {% include cards/index.html %} {% endif %}
 
-    {% include header.html %}
+  <!--<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss/feed.articles.xml" />-->
+  <link href='//fonts.googleapis.com/css?family=Titillium+Web|Source+Code+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/assets/css/style.css">
 
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <header id="header">
+    <div id="header-outer" class="outer">
+      <div class="container">
+        <div class="container-inner">
+          <div id="header-title">
+            <h1 class="logo-wrap">
+              <a href="/" class="logo"></a>
+            </h1>
+            <h2 class="subtitle-wrap">
+              <p class="subtitle">My Playground</p>
+            </h2>
+
+          </div>
+          <div id="header-inner" class="nav-container">
+            <a id="main-nav-toggle" class="nav-icon"></a>
+            <div class="nav-container-inner">
+              <ul id="main-nav">
+                <li class="main-nav-list-item"><a class="main-nav-list-link" href="/">Home</a></li>
+                <li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/java">Java</a></li>
+                <li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/spring">Spring</a></li>
+                <li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/jpa">JPA</a></li>
+              </ul>
+              <nav id="sub-nav">
+                <div id="search-form-wrap">
+                  <form action="/search.html" method="get" accept-charset="UTF-8" class="search-form">
+                    <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+                  </form>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </header>
 
-    {% include footer.html %}
+  <div class="container">
+    <div class="main-body container-inner">
+      <div class="main-body-inner">
+        <section id="main">
 
-  </body>
+          <div class="main-body-header">
+          {% if page.id %}
+              <h1 class="header">
+                {% for category in page.categories %}
+                  <a class="page-title-link" href="/categories/{{category | slugify }}/">{{ category }}</a>
+                  {% if forloop.last == false %}
+                    <i class="icon" id="icon-angle-right"></i>
+                  {% endif %}
+                {% endfor %}
+              </h1>
+          {% elsif page.isCategory %}
+            <h1 class="header"><i class="icon" id="icon-category">
+            </i>category : <em class="page-title-link">{{ page.category }}</em></h1>
+          {% elsif page.url == '/index.html' %}
+            <h1 class="header">
+              <em class="page-title-link" data-url="home">Home</em>
+            </h1>
+          {% else %}
+            <h1 class="header">
+              <em class="page-title-link" data-url="home">{{page.title}}</em>
+            </h1>
+          {% endif %}
+        </div>
+
+          <div class="main-body-content">
+            {{ content }}
+
+            {% if page.id %}
+            <section id="comments" class="row" style="width: 90%">
+              <div id="disqus_thread"></div>
+            </section>
+            {% endif %}
+          </div>
+
+        </section>
+
+        <aside id="sidebar">
+          <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+          <div class="sidebar-top">
+            <p>follow:</p>
+            <ul class="social-links">
+              <li><a class="social-tooltip" title="twitter" href="https://twitter.com/dataspheres" target="_blank"><i id="icon-twitter" class="icon"></i></a></li>
+              <li><a class="social-tooltip" title="github" href="https://github.com/ryanhskwon" target="_blank"><i id="icon-github" class="icon"></i></a></li>
+            </ul>
+          </div>
+
+      <nav id="article-nav">
+
+        {% if page.next.url %}
+          <a href="{{page.next.url}}" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">newer</strong>
+            <p class="article-nav-title">{{page.next.title}}</p>
+            <i class="icon" id="icon-chevron-right"></i>
+          </a>
+        {% endif %}
+        {% if page.previous.url %}
+          <a href="{{page.previous.url}}" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">older</strong>
+            <p class="article-nav-title">{{page.previous.title}}</p>
+            <i class="icon" id="icon-chevron-left"></i>
+          </a>
+        {% endif %}
+
+      </nav>
+
+          <div class="widgets-container">
+
+            <div class="widget-wrap">
+              <h3 class="widget-title">featured</h3>
+              <div class="widget">
+                <ul id="recent-post" class="no-thumbnail">
+
+                  {% for post in site.tags.featured limit:5 %}
+                  <li>
+                    <div class="item-inner">
+                      <p class="item-category"><a class="article-category-link" href="/categories/{{post.categories | first | slugify}}">{{post.categories | first}}</a></p>
+                      <p class="item-title"><a href="{{post.url}}" class="title">{{ post.title }}</a></p>
+                      <p class="item-date">
+                        <time datetime="{{ post.date | date_to_long_string }}" itemprop="datePublished">{{ post.date | date_to_string }}</time>
+                      </p>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+            <div class="widget-wrap">
+              <h3 class="widget-title">recent</h3>
+              <div class="widget">
+                <ul id="recent-post" class="no-thumbnail">
+
+                  {% for post in site.posts limit:5 %}
+                  <li>
+                    <div class="item-inner">
+                      <p class="item-category"><a class="article-category-link" href="/categories/{{post.categories | first | slugify}}">{{post.categories | first}}</a></p>
+                      <p class="item-title"><a href="{{post.url}}" class="title">{{ post.title }}</a></p>
+                      <p class="item-date">
+                        <time datetime="{{ post.date | date_to_long_string }}" itemprop="datePublished">{{ post.date | date_to_string }}</time>
+                      </p>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+            <div class="widget-wrap widget-float">
+              <h3 class="widget-title">tag cloud</h3>
+              <div class="widget tagcloud">
+                {% for category in site.categories %}
+
+                  {% capture fontsize %}{{ category | last | size | times: 100 | divided_by: site.categories.size }}{% endcapture %}
+
+                  <a  href="/categories/{{ category | first | slugify }}/"
+                      style="font-size: {{ fontsize | divided_by: 5 | plus:10 }}px">
+                      {{ category | first }}
+                  </a>
+                {% endfor %}
+
+              </div>
+            </div>
+
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="container-inner">
+        <a id="back-to-top" href="javascript:;"><i class="icon" id="icon-angle-up"></i></a>
+        <div class="credit">
+          <p>© 2016 Ryan Kwon</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+   <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script> -->
+  <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/gist-embed/2.2/gist-embed.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.2.1/anchor.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.7.0/axios.min.js"></script>
+
+  <script>
+      var _gaq = [['_setAccount', '{{site.ga-tracking_id}}'], ['_trackPageview']];
+      (function (d, t) {
+          var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          g.src = '//www.google-analytics.com/ga.js';
+          s.parentNode.insertBefore(g, s)
+      }(document, 'script'));
+  </script>
+  {% if page.id %}
+  <script type="text/javascript">
+      var disqus_shortname = '{{site.disqus_shortname}}';
+      (function () {
+          var dsq = document.createElement('script');
+          dsq.type = 'text/javascript';
+          dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+      (function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+      }());
+  </script>
+  {% endif %}
+  <script>
+      window.twttr = (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+          if (d.getElementById(id))return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+          t._e = [];
+          t.ready = function (f) {t._e.push(f);};
+          return t;
+      }(document, "script", "twitter-wjs"));
+  </script>
+  <script src="/assets/js/all.js"></script>
+  {% if page.title == 'Search' %}
+  <script type="text/javascript">
+    var posts = [];
+    {% for post in site.posts %}
+    posts.push({
+      excerpt: {{ post.excerpt | jsonify }},
+      title: {{ post.title | jsonify }},
+      categories: {{ post.categories | jsonify }},
+      tags: {{ post.tags | jsonify }},
+      title: {{ post.title | jsonify }},
+      url: {{ post.url | jsonify }}
+    });
+    {% endfor %}
+    search(posts);
+  </script>
+  {% endif %}
+  {% if page.title == 'Live feed' %}
+  <script type="text/javascript">
+    getFeed();
+  </script>
+  {% endif %}
+</body>
 
 </html>
